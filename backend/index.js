@@ -10,46 +10,43 @@ const express = require(`express`),
  * @param {Date} d2
  * @returns {Boolean} Day, month and year equal for the given date
  */
-function equalDayMonthYear(d1, d2) {
+function afterDate(d1, d2) {
 	return (
-		d1.getUTCDate() === d2.getUTCDate() &&
-		d1.getUTCMonth() === d2.getUTCMonth() &&
-		d1.getUTCFullYear() === d2.getUTCFullYear()
+		d1.getTime() <= d2.getTime() &&
+		d1.getUTCDate() == d2.getUTCDate() &&
+		d1.getUTCMonth() == d2.getUTCMonth() &&
+		d1.getUTCFullYear() == d2.getUTCFullYear()
 	)
 }
 
 /**
  *
  * @param {String} queryText
- * @param {Request} request
- * @param {Response} response
+ * @param {Request} req
+ * @param {Response} res
  */
-function clientQuery(
+function clientSelectQuery(
 	queryText,
-	request,
-	response
+	req,
+	res
 ) {
 	client.query(queryText, (error, result) => {
 		if (error) {
-			console.error(error)
-			response.status(400).sendStatus(404)
+			res.status(400).sendStatus(400)
 			return
 		}
 
-		if (Object.keys(request.query).length != 0) {
+		if (Object.keys(req.query).length != 0) {
 			let answer = [],
 				i = 0
 
-			for (const key in request.query) {
+			for (const key in req.query) {
 				if (
-					Object.hasOwnProperty.call(
-						request.query,
-						key
-					)
+					Object.hasOwnProperty.call(req.query, key)
 				) {
-					const element = request.query[key]
+					const element = req.query[key]
 					if (result.rows[i][key] === undefined) {
-						response.status(400).send(answer)
+						res.status(400).send(answer)
 						return
 					}
 					let value = result.rows[i][key],
@@ -61,14 +58,16 @@ function clientQuery(
 						)
 					} else if (typeof value === `object`) {
 						answerToPush = result.rows.filter(row =>
-							equalDayMonthYear(
-								new Date(row[key]),
-								new Date(element)
+							afterDate(
+								new Date(element),
+								new Date(row[key])
 							)
 						)
 					} else if (typeof value === `string`) {
 						answerToPush = result.rows.filter(row =>
-							row[key].includes(element)
+							row[key]
+								.toLowerCase()
+								.includes(element.toLowerCase())
 						)
 					} else if (typeof value === `boolean`) {
 						if (element === 'true') {
@@ -85,11 +84,36 @@ function clientQuery(
 				}
 				i++
 			}
-			response.status(200).send(answer)
+
+			/**
+			 * Get the intersections between all arrays and put it on the first index of the answer
+			 */
+			answer.forEach(array => {
+				answer[0] = answer
+					.at(0)
+					.filter(element => array.includes(element))
+			})
+
+			res.status(200).send(answer.at(0))
 			return
 		}
-		response.status(200).send(result.rows)
+		res.status(200).send(result.rows)
 		return
+	})
+}
+
+/**
+ *
+ * @param {String} queryText
+ * @param {Response} res
+ */
+function clientInsertQuery(queryText, res) {
+	client.query(queryText, (error, result) => {
+		if (error) {
+			res.status(400).sendStatus(400)
+			return
+		}
+		res.status(200).send(result.rows)
 	})
 }
 
@@ -119,9 +143,9 @@ client
 	})
 	.catch(err => console.error(err))
 
-ExpressApp.get(`/`, (request, response) => {
-	if (Object.keys(request.query).length != 0) {
-		response.status(200).send({
+ExpressApp.get(`/`, (req, res) => {
+	if (Object.keys(req.query).length != 0) {
+		res.status(200).send({
 			creators: [
 				`Oziel Ferreira`,
 				`Celomar Filho`,
@@ -131,35 +155,178 @@ ExpressApp.get(`/`, (request, response) => {
 		})
 		return
 	}
-	response.status(200).send({ response: `OK` })
+	res.status(200).send({ res: `OK` })
 })
 
-ExpressApp.get(`/user`, (request, response) => {
-	clientQuery(
-		`SELECT u.id, u.created, u.name, u.description, u.deleted FROM "user" u;`,
-		request,
-		response
+ExpressApp.get(`/user`, (req, res) => {
+	clientSelectQuery(
+		`SELECT * FROM user_data u;`,
+		req,
+		res
 	)
 })
 
-ExpressApp.get(`/post`, (request, response) => {
-	clientQuery(
+ExpressApp.get(`/post`, (req, res) => {
+	clientSelectQuery(
 		`SELECT * FROM post p;`,
-		request,
-		response
+		req,
+		res
 	)
 })
 
-ExpressApp.get(
-	`/comment`,
-	(request, response) => {
-		clientQuery(
-			`SELECT * FROM comment c;`,
-			request,
-			response
+ExpressApp.get(`/comment`, (req, res) => {
+	clientSelectQuery(
+		`SELECT * FROM comment c;`,
+		req,
+		res
+	)
+})
+
+ExpressApp.post('/user', (req, res) => {
+	let now = new Date(Date.now()).toJSON()
+
+	const { name, password, description } =
+		req.query
+
+	name && password && description
+		? clientInsertQuery(
+				`INSERT INTO "user"(created, name, password, description) VALUES ('${now}', '${name}', '${password}', '${description}')  RETURNING *`,
+				res
+		  )
+		: res.status(400).sendStatus(400)
+})
+
+ExpressApp.post('/post', (req, res) => {
+	let now = new Date(Date.now()).toJSON()
+
+	const { user_id, title, content } = req.query
+
+	user_id && title && content
+		? clientInsertQuery(
+				`INSERT INTO post (created, user_id, title, content) VALUES ('${now}', '${user_id}', '${title}', '${content}') RETURNING *`,
+				res
+		  )
+		: res.status(400).sendStatus(400)
+})
+
+ExpressApp.post('/comment', (req, res) => {
+	let now = new Date(Date.now()).toJSON()
+
+	const { post_id, user_id, content } = req.query
+
+	post_id && user_id && content
+		? clientInsertQuery(
+				`INSERT INTO comment (created, post_id, user_id, content) VALUES ('${now}', '${post_id}', '${user_id}', '${content}') RETURNING *`,
+				res
+		  )
+		: res.status(400).sendStatus(400)
+})
+
+ExpressApp.put(`/user`, (req, res) => {
+	const { id, name, password, description } =
+		req.query
+
+	if (id && name && password && description)
+		clientInsertQuery(
+			`UPDATE "user" SET name = '${name}', password='${password}', description='${description}' WHERE id = ${id};`,
+			res
 		)
-	}
-)
+	else if (id && name && password)
+		clientInsertQuery(
+			`UPDATE "user" SET name = '${name}', password='${password}' WHERE id = ${id};`,
+			res
+		)
+	else if (id && name && description)
+		clientInsertQuery(
+			`UPDATE "user" SET name = '${name}', description='${description}' WHERE id = ${id};`,
+			res
+		)
+	else if (id && password && description)
+		clientInsertQuery(
+			`UPDATE "user" SET password='${password}', description='${description}' WHERE id = ${id};`,
+			res
+		)
+	else if (id && name)
+		clientInsertQuery(
+			`UPDATE "user" SET name = '${name}' WHERE id = ${id};`,
+			res
+		)
+	else if (id && password)
+		clientInsertQuery(
+			`UPDATE "user" SET password = '${password}' WHERE id = ${id};`,
+			res
+		)
+	else if (id && description)
+		clientInsertQuery(
+			`UPDATE "user" SET description = '${description}' WHERE id = ${id};`,
+			res
+		)
+	else res.status(400).sendStatus(400)
+})
+
+ExpressApp.put(`/post`, (req, res) => {
+	const { id, user_id, content, title } =
+		req.query
+
+	if (id && content && title)
+		clientInsertQuery(
+			`UPDATE post SET content = '${content}', title = '${title}' WHERE id = ${id};`,
+			res
+		)
+	else if (id && content)
+		clientInsertQuery(
+			`UPDATE post SET content = '${content}' WHERE id = ${id};`,
+			res
+		)
+	else if (id && title)
+		clientInsertQuery(
+			`UPDATE post SET title = '${title}' WHERE id = ${id};`,
+			res
+		)
+	else if (user_id && content && title)
+		clientInsertQuery(
+			`UPDATE post SET content = '${content}', title = '${title}' WHERE user_id = ${user_id};`,
+			res
+		)
+	else if (user_id && content)
+		clientInsertQuery(
+			`UPDATE post SET content = '${content}' WHERE user_id = ${user_id};`,
+			res
+		)
+	else if (user_id && title)
+		clientInsertQuery(
+			`UPDATE post SET title = '${title}' WHERE user_id = ${user_id};`,
+			res
+		)
+	else res.status(400).sendStatus(400)
+})
+
+ExpressApp.put(`/comment`, (req, res) => {
+	const { post_id, user_id, content, id } =
+		req.query
+
+	if (id && content)
+		clientInsertQuery(
+			`UPDATE comment SET content = '${content}' WHERE id = ${id};`,
+			res
+		)
+	else if (post_id && user_id && content)
+		clientInsertQuery(
+			`UPDATE comment SET content = '${content}' WHERE post_id = ${post_id} AND user_id = ${user_id};`,
+			res
+		)
+	else if (post_id && content)
+		clientInsertQuery(
+			`UPDATE comment SET content = '${content}' WHERE post_id = ${post_id};`,
+			res
+		)
+	else if (user_id && content)
+		clientInsertQuery(
+			`UPDATE comment SET content = '${content}' WHERE user_id = ${user_id};`,
+			res
+		)
+	else res.status(400).sendStatus(400)
+})
 
 ExpressApp.listen(port, () =>
 	console.log(

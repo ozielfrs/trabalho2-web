@@ -1,5 +1,5 @@
 -- Created by Vertabelo (http://vertabelo.com)
--- Last modification date: 2022-12-02 14:15:43.902
+-- Last modification date: 2022-12-03 20:33:15.583
 -- tables
 -- Table: comment
 CREATE TABLE comment (
@@ -44,6 +44,18 @@ CREATE TABLE "user" (
   CONSTRAINT user_pk PRIMARY KEY (id)
 );
 
+-- views
+-- View: user_data
+CREATE VIEW user_data AS
+SELECT
+  u.id,
+  u.created,
+  u.name,
+  u.description,
+  u.deleted,
+FROM
+  " user " u;
+
 -- foreign keys
 -- Reference: comment_post (table: comment)
 ALTER TABLE
@@ -55,12 +67,12 @@ ADD
 ALTER TABLE
   comment
 ADD
-  CONSTRAINT comment_user FOREIGN KEY (user_id) REFERENCES "user" (id) NOT DEFERRABLE INITIALLY IMMEDIATE;
+  CONSTRAINT comment_user FOREIGN KEY (user_id) REFERENCES " user " (id) NOT DEFERRABLE INITIALLY IMMEDIATE;
 
 -- Reference: post_user (table: post)
 ALTER TABLE
   post
 ADD
-  CONSTRAINT post_user FOREIGN KEY (user_id) REFERENCES "user" (id) NOT DEFERRABLE INITIALLY IMMEDIATE;
+  CONSTRAINT post_user FOREIGN KEY (user_id) REFERENCES " user " (id) NOT DEFERRABLE INITIALLY IMMEDIATE;
 
 -- End of file.

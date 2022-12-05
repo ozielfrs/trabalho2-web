@@ -1,37 +1,29 @@
 -- SELECTS USED FOR EXAMPLES
 -- GET ALL USERS IN THE DATABASE
 SELECT
-  u.id,
-  u.name,
-  u.description
+  *
 FROM
-  "user" u;
+  user_data u;
 
 -- GET ALL POSTS IN THE DATABASE
 SELECT
-  p.id,
-  p.title,
-  p.content
+  *
 FROM
   post p;
 
 -- GET ALL COMMENTS IN THE DATABASE
 SELECT
-  c.id,
-  c.content
+  *
 FROM
   comment c;
 
 -- GET ALL POSTS FROM ALL USERS IN THE DATABASE
 SELECT
-  p.id "postID",
-  p.title,
-  p.content "post",
-  u.id "userID",
+  p.*,
   u.name,
-  u.description
+  u.deleted
 FROM
-  "user" u
+  user_data u
   INNER JOIN post p ON u.id = p.user_id;
 
 -- GET ALL POSTS FROM A SINGLE USER IN THE DATABASE
@@ -43,7 +35,7 @@ SELECT
   u.name,
   u.description
 FROM
-  "user" u
+  user_data u
   INNER JOIN post p ON u.id = p.user_id
 WHERE
   u.id = 10;
@@ -57,7 +49,7 @@ SELECT
   u.description
 FROM
   comment c
-  INNER JOIN "user" u ON c.user_id = u.id;
+  INNER JOIN user_data u ON c.user_id = u.id;
 
 -- GET ALL COMMENTS FROM A SINGLE USER IN THE DATABASE
 SELECT
@@ -68,7 +60,7 @@ SELECT
   u.description
 FROM
   comment c
-  INNER JOIN "user" u ON c.user_id = u.id
+  INNER JOIN user_data u ON c.user_id = u.id
 WHERE
   u.id = 10;
 
@@ -83,7 +75,7 @@ FROM
   comment c
   INNER JOIN post p ON c.post_id = p.id;
 
--- GET ALL COMMENTS FROM A SINGLE POST IN THE DATABASE 
+-- GET ALL COMMENTS FROM A SINGLE POST IN THE DATABASE
 SELECT
   c.id "commentID",
   c.content "comment",
@@ -109,7 +101,7 @@ SELECT
 FROM
   comment c
   INNER JOIN post p ON c.post_id = p.id
-  INNER JOIN "user" u ON c.user_id = u.id;
+  INNER JOIN user_data u ON c.user_id = u.id;
 
 -- GET ALL COMMENTS FROM A SINGLE POST FROM ALL USERS IN THE DATABASE
 SELECT
@@ -124,7 +116,7 @@ SELECT
 FROM
   comment c
   INNER JOIN post p ON c.post_id = p.id
-  INNER JOIN "user" u ON c.user_id = u.id
+  INNER JOIN user_data u ON c.user_id = u.id
 WHERE
   p.id = 10;
 
@@ -138,7 +130,7 @@ SELECT
   u.name,
   u.description
 FROM
-  "user" u
+  user_data u
   INNER JOIN post p ON u.id = p.user_id
 ORDER BY
   p.created DESC;
@@ -153,7 +145,7 @@ SELECT
   u.name,
   u.description
 FROM
-  "user" u
+  user_data u
   INNER JOIN post p ON u.id = p.user_id
 WHERE
   u.id = 10
@@ -171,7 +163,7 @@ SELECT
   u.description
 FROM
   comment c
-  INNER JOIN "user" u ON c.user_id = u.id
+  INNER JOIN user_data u ON c.user_id = u.id
 ORDER BY
   c.created DESC;
 
@@ -186,7 +178,7 @@ SELECT
   u.description
 FROM
   comment c
-  INNER JOIN "user" u ON c.user_id = u.id
+  INNER JOIN user_data u ON c.user_id = u.id
 WHERE
   u.id = 10
 ORDER BY

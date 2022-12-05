@@ -2,14 +2,16 @@
 
 ## ❌ Ainda não tem
 
-Implementação de métodos de atualização no Back-End, implementação de métodos de busca mais específicos no Back-End.
+Implementação de métodos de atualização no Back-End, implementação dos métodos de deleção no bando de dados a partir do `express.js`.
 Implementação do Front-End.
 
 ## ✔️ Já tem
 
-Banco de Dados completo, implementação parcial do Back-End utilizando o `express.js`.
+Banco de Dados completo, implementação parcial do Back-End utilizando o `express.js` (Create, Read and Update).
 
 ---
+
+Exemplos usando o [Postman](https://www.postman.com/) presentes na pasta [test](/backend/test/). Para usá-los, deve-se importar o aquivo [CodeAPI](/backend/test/CodeBaseAPI.postman.json)
 
 O projeto tem o banco de dados, inserções de dados de exemplo e CRUD (Create, Read, Update and Delete) definidos na pasta [sql](/sql). A documentação do banco e seu diagrama estão presentes na mesma pasta.
 
@@ -30,9 +32,7 @@ E esse link retornará da tabela "user" os dados do usuário de `id=1`, em um _a
 http://localhost:8081/user/?id=1&description=lorem
 ```
 
-E esse link retornará, para cada item da consulta, um _array_ contendo seus dados em `json`, quando em campos de texto, o código busca encontrar ocorrências do texto na coluna de consulta da tabela, quando para busca de ocorrência de valor número o código busca o valor exato, quando para `object` o código tenta convertê-lo em uma data para realizar a checagem e, quando booleano o código tenta encontrar ocorrências de `true` ou `false`.
-
-Um exemplo completo para a tabela de usuários seria:
+E esse link retornará, para cada item da consulta, o resultado filtrado para tal. O próximo link de exemplo também filtra todos os usuários com os atributos iguais aos passados pela consulta:
 
 ```bash
 http://localhost:8081/user/?id=1&created=2022-12-02&name=oz&description=lorem&deleted=true

@@ -1,0 +1,626 @@
+{
+	"info": {
+		"_postman_id": "28157505-daf1-4ea3-8fbe-861047d1b1e3",
+		"name": "CodeBaseAPI",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "READ",
+			"item": [
+				{
+					"name": "UserRead",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/user/",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "8081",
+							"path": ["user", ""],
+							"query": [
+								{
+									"key": "id",
+									"value": "1",
+									"description": "The user ID",
+									"disabled": true
+								},
+								{
+									"key": "created",
+									"value": "2022-12-06",
+									"description": "The Date which the user was created",
+									"disabled": true
+								},
+								{
+									"key": "name",
+									"value": "example",
+									"description": "The user name",
+									"disabled": true
+								},
+								{
+									"key": "description",
+									"value": "Oziel",
+									"description": "The occurence of the word in the user description",
+									"disabled": true
+								},
+								{
+									"key": "deleted",
+									"value": "false",
+									"description": "The state of the user",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "UserRead",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8081/user/?description=Oziel",
+									"protocol": "http",
+									"host": ["localhost"],
+									"port": "8081",
+									"path": ["user", ""],
+									"query": [
+										{
+											"key": "id",
+											"value": "1",
+											"description": "The user ID",
+											"disabled": true
+										},
+										{
+											"key": "created",
+											"value": "2022-12-06",
+											"description": "The Date which the user was created",
+											"disabled": true
+										},
+										{
+											"key": "name",
+											"value": "example",
+											"description": "The user name",
+											"disabled": true
+										},
+										{
+											"key": "description",
+											"value": "Oziel",
+											"description": "The occurence of the word in the user description"
+										},
+										{
+											"key": "deleted",
+											"value": "false",
+											"description": "The state of the user",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "PostRead",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/post/",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "8081",
+							"path": ["post", ""],
+							"query": [
+								{
+									"key": "id",
+									"value": "1",
+									"description": "The post ID",
+									"disabled": true
+								},
+								{
+									"key": "user_id",
+									"value": "10",
+									"description": "The user ID of the post",
+									"disabled": true
+								},
+								{
+									"key": "created",
+									"value": "2022-12-05",
+									"description": "The date witch the post was created",
+									"disabled": true
+								},
+								{
+									"key": "title",
+									"value": "sample",
+									"description": "The title of the post",
+									"disabled": true
+								},
+								{
+									"key": "content",
+									"value": "feugiat",
+									"description": "The occurences of the word in the content",
+									"disabled": true
+								},
+								{
+									"key": "number_likes",
+									"value": "0",
+									"description": "The number of likes",
+									"disabled": true
+								},
+								{
+									"key": "number_comments",
+									"value": "0",
+									"description": "The number of comments",
+									"disabled": true
+								},
+								{
+									"key": "deleted",
+									"value": "false",
+									"description": "The state of the post",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "PostRead",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8081/post/?user_id=10",
+									"protocol": "http",
+									"host": ["localhost"],
+									"port": "8081",
+									"path": ["post", ""],
+									"query": [
+										{
+											"key": "id",
+											"value": "1",
+											"description": "The post ID",
+											"disabled": true
+										},
+										{
+											"key": "user_id",
+											"value": "10",
+											"description": "The user ID of the post"
+										},
+										{
+											"key": "created",
+											"value": "2022-12-05",
+											"description": "The date witch the post was created",
+											"disabled": true
+										},
+										{
+											"key": "title",
+											"value": "sample",
+											"description": "The title of the post",
+											"disabled": true
+										},
+										{
+											"key": "content",
+											"value": "feugiat",
+											"description": "The occurences of the word in the content",
+											"disabled": true
+										},
+										{
+											"key": "number_likes",
+											"value": "0",
+											"description": "The number of likes",
+											"disabled": true
+										},
+										{
+											"key": "number_comments",
+											"value": "0",
+											"description": "The number of comments",
+											"disabled": true
+										},
+										{
+											"key": "deleted",
+											"value": "false",
+											"description": "The state of the post",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "CommentRead",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/comment/",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "8081",
+							"path": ["comment", ""],
+							"query": [
+								{
+									"key": "id",
+									"value": "1",
+									"description": "The comment ID",
+									"disabled": true
+								},
+								{
+									"key": "post_id",
+									"value": "21",
+									"description": "The post ID of the comment",
+									"disabled": true
+								},
+								{
+									"key": "user_id",
+									"value": "10",
+									"description": "The user ID of the comment",
+									"disabled": true
+								},
+								{
+									"key": "created",
+									"value": "2022-12-02T20:00:00",
+									"description": "The date which the comment was created",
+									"disabled": true
+								},
+								{
+									"key": "content",
+									"value": "auctor",
+									"description": "The occurences of words in the comment",
+									"disabled": true
+								},
+								{
+									"key": "number_likes",
+									"value": "0",
+									"description": "The number of likes",
+									"disabled": true
+								},
+								{
+									"key": "deleted",
+									"value": "false",
+									"description": "The post state",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "CommentRead",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8081/comment/?post_id=21",
+									"protocol": "http",
+									"host": ["localhost"],
+									"port": "8081",
+									"path": ["comment", ""],
+									"query": [
+										{
+											"key": "id",
+											"value": "1",
+											"description": "The comment ID",
+											"disabled": true
+										},
+										{
+											"key": "post_id",
+											"value": "21",
+											"description": "The post ID of the comment"
+										},
+										{
+											"key": "user_id",
+											"value": "10",
+											"description": "The user ID of the comment",
+											"disabled": true
+										},
+										{
+											"key": "created",
+											"value": "2022-12-02T20:00:00",
+											"description": "The date which the comment was created",
+											"disabled": true
+										},
+										{
+											"key": "content",
+											"value": "auctor",
+											"description": "The occurences of words in the comment",
+											"disabled": true
+										},
+										{
+											"key": "number_likes",
+											"value": "0",
+											"description": "The number of likes",
+											"disabled": true
+										},
+										{
+											"key": "deleted",
+											"value": "false",
+											"description": "The post state",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				}
+			],
+			"auth": {
+				"type": "noauth"
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [""]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [""]
+					}
+				}
+			]
+		},
+		{
+			"name": "CREATE",
+			"item": [
+				{
+					"name": "UserCreate",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/user/?name=differa&password=example&description=asd",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "8081",
+							"path": ["user", ""],
+							"query": [
+								{
+									"key": "name",
+									"value": "differa",
+									"description": "The name of the user to be added"
+								},
+								{
+									"key": "password",
+									"value": "example",
+									"description": "The user password"
+								},
+								{
+									"key": "description",
+									"value": "asd",
+									"description": "The user description"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PostCreate",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/post/?user_id=101&title=Sample&content=Some content",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "8081",
+							"path": ["post", ""],
+							"query": [
+								{
+									"key": "user_id",
+									"value": "101",
+									"description": "The user who made the post"
+								},
+								{
+									"key": "title",
+									"value": "Sample",
+									"description": "The post title"
+								},
+								{
+									"key": "content",
+									"value": "Some content",
+									"description": "The content of the post"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CommentCreate",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/comment?post_id=103&user_id=101&content=Isso aqui é um comentário \"(⁠ ͝⁠°⁠ ͜⁠ʖ͡⁠°⁠)⁠ᕤ ❤❤❤",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "8081",
+							"path": ["comment"],
+							"query": [
+								{
+									"key": "post_id",
+									"value": "103",
+									"description": "The post where the comment is being added"
+								},
+								{
+									"key": "user_id",
+									"value": "101",
+									"description": "The user who's making the comment"
+								},
+								{
+									"key": "content",
+									"value": "Isso aqui é um comentário \"(⁠ ͝⁠°⁠ ͜⁠ʖ͡⁠°⁠)⁠ᕤ ❤❤❤",
+									"description": "The content of the comment"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "noauth"
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [""]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [""]
+					}
+				}
+			]
+		},
+		{
+			"name": "UPDATE",
+			"item": [
+				{
+					"name": "CommentUpdate",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/comment/?post_id=21&content=Novo comentário",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "8081",
+							"path": ["comment", ""],
+							"query": [
+								{
+									"key": "id",
+									"value": "1",
+									"description": "The id of the comment",
+									"disabled": true
+								},
+								{
+									"key": "post_id",
+									"value": "21",
+									"description": "The post ID of the comment"
+								},
+								{
+									"key": "user_id",
+									"value": "10",
+									"description": "The user ID of the comment",
+									"disabled": true
+								},
+								{
+									"key": "content",
+									"value": "Novo comentário",
+									"description": "The content of the comment"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PostUpdate",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/post/",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "8081",
+							"path": ["post", ""],
+							"query": [
+								{
+									"key": "id",
+									"value": "1",
+									"description": "The ID of the post",
+									"disabled": true
+								},
+								{
+									"key": "user_id",
+									"value": "10",
+									"description": "The user ID of the post",
+									"disabled": true
+								},
+								{
+									"key": "title",
+									"value": "Novo título",
+									"description": "The title of the post",
+									"disabled": true
+								},
+								{
+									"key": "content",
+									"value": "Novo conteúdo 2",
+									"description": "The content of the post",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UserUpdate",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/user/?id=1&name&password&description=Oziel",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "8081",
+							"path": ["user", ""],
+							"query": [
+								{
+									"key": "id",
+									"value": "1",
+									"description": "The user ID"
+								},
+								{
+									"key": "name",
+									"value": null,
+									"description": "The user name"
+								},
+								{
+									"key": "password",
+									"value": null,
+									"description": "The user password"
+								},
+								{
+									"key": "description",
+									"value": "Oziel",
+									"description": "The user description"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
