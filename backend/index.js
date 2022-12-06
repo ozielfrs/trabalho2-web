@@ -228,37 +228,37 @@ ExpressApp.put(`/user`, (req, res) => {
 
 	if (id && name && password && description)
 		clientInsertQuery(
-			`UPDATE "user" SET name = '${name}', password='${password}', description='${description}' WHERE id = ${id};`,
+			`UPDATE "user" SET name = '${name}', password='${password}', description='${description}' WHERE id = ${id} RETURNING *;`,
 			res
 		)
 	else if (id && name && password)
 		clientInsertQuery(
-			`UPDATE "user" SET name = '${name}', password='${password}' WHERE id = ${id};`,
+			`UPDATE "user" SET name = '${name}', password='${password}' WHERE id = ${id} RETURNING *;`,
 			res
 		)
 	else if (id && name && description)
 		clientInsertQuery(
-			`UPDATE "user" SET name = '${name}', description='${description}' WHERE id = ${id};`,
+			`UPDATE "user" SET name = '${name}', description='${description}' WHERE id = ${id} RETURNING *;`,
 			res
 		)
 	else if (id && password && description)
 		clientInsertQuery(
-			`UPDATE "user" SET password='${password}', description='${description}' WHERE id = ${id};`,
+			`UPDATE "user" SET password='${password}', description='${description}' WHERE id = ${id} RETURNING *;`,
 			res
 		)
 	else if (id && name)
 		clientInsertQuery(
-			`UPDATE "user" SET name = '${name}' WHERE id = ${id};`,
+			`UPDATE "user" SET name = '${name}' WHERE id = ${id} RETURNING *;`,
 			res
 		)
 	else if (id && password)
 		clientInsertQuery(
-			`UPDATE "user" SET password = '${password}' WHERE id = ${id};`,
+			`UPDATE "user" SET password = '${password}' WHERE id = ${id} RETURNING *;`,
 			res
 		)
 	else if (id && description)
 		clientInsertQuery(
-			`UPDATE "user" SET description = '${description}' WHERE id = ${id};`,
+			`UPDATE "user" SET description = '${description}' WHERE id = ${id} RETURNING *;`,
 			res
 		)
 	else res.status(400).sendStatus(400)
@@ -270,32 +270,32 @@ ExpressApp.put(`/post`, (req, res) => {
 
 	if (id && content && title)
 		clientInsertQuery(
-			`UPDATE post SET content = '${content}', title = '${title}' WHERE id = ${id};`,
+			`UPDATE post SET content = '${content}', title = '${title}' WHERE id = ${id} RETURNING *;`,
 			res
 		)
 	else if (id && content)
 		clientInsertQuery(
-			`UPDATE post SET content = '${content}' WHERE id = ${id};`,
+			`UPDATE post SET content = '${content}' WHERE id = ${id} RETURNING *;`,
 			res
 		)
 	else if (id && title)
 		clientInsertQuery(
-			`UPDATE post SET title = '${title}' WHERE id = ${id};`,
+			`UPDATE post SET title = '${title}' WHERE id = ${id} RETURNING *;`,
 			res
 		)
 	else if (user_id && content && title)
 		clientInsertQuery(
-			`UPDATE post SET content = '${content}', title = '${title}' WHERE user_id = ${user_id};`,
+			`UPDATE post SET content = '${content}', title = '${title}' WHERE user_id = ${user_id} RETURNING *;`,
 			res
 		)
 	else if (user_id && content)
 		clientInsertQuery(
-			`UPDATE post SET content = '${content}' WHERE user_id = ${user_id};`,
+			`UPDATE post SET content = '${content}' WHERE user_id = ${user_id} RETURNING *;`,
 			res
 		)
 	else if (user_id && title)
 		clientInsertQuery(
-			`UPDATE post SET title = '${title}' WHERE user_id = ${user_id};`,
+			`UPDATE post SET title = '${title}' WHERE user_id = ${user_id} RETURNING *;`,
 			res
 		)
 	else res.status(400).sendStatus(400)
@@ -307,22 +307,132 @@ ExpressApp.put(`/comment`, (req, res) => {
 
 	if (id && content)
 		clientInsertQuery(
-			`UPDATE comment SET content = '${content}' WHERE id = ${id};`,
+			`UPDATE comment SET content = '${content}' WHERE id = ${id} RETURNING *;`,
 			res
 		)
 	else if (post_id && user_id && content)
 		clientInsertQuery(
-			`UPDATE comment SET content = '${content}' WHERE post_id = ${post_id} AND user_id = ${user_id};`,
+			`UPDATE comment SET content = '${content}' WHERE post_id = ${post_id} AND user_id = ${user_id} RETURNING *;`,
 			res
 		)
 	else if (post_id && content)
 		clientInsertQuery(
-			`UPDATE comment SET content = '${content}' WHERE post_id = ${post_id};`,
+			`UPDATE comment SET content = '${content}' WHERE post_id = ${post_id} RETURNING *;`,
 			res
 		)
 	else if (user_id && content)
 		clientInsertQuery(
-			`UPDATE comment SET content = '${content}' WHERE user_id = ${user_id};`,
+			`UPDATE comment SET content = '${content}' WHERE user_id = ${user_id} RETURNING *;`,
+			res
+		)
+	else res.status(400).sendStatus(400)
+})
+
+ExpressApp.delete(`/user`, (req, res) => {
+	const { id, name, description } = req.query
+
+	if (id)
+		clientInsertQuery(
+			`UPDATE "user" SET deleted = TRUE WHERE id = ${id} RETURNING *;`,
+			res
+		)
+	else if (name)
+		clientInsertQuery(
+			`UPDATE "user" SET deleted = TRUE WHERE name LIKE '%${name}%' RETURNING *;`,
+			res
+		)
+	else if (description)
+		clientInsertQuery(
+			`UPDATE "user" SET deleted = TRUE WHERE description LIKE '%${description}%' RETURNING *;`,
+			res
+		)
+	else res.status(400).sendStatus(400)
+})
+
+ExpressApp.delete(`/post`, (req, res) => {
+	const { id, title, user_id, content } =
+		req.query
+
+	if (id)
+		clientInsertQuery(
+			`UPDATE post SET deleted = TRUE WHERE id = ${id} RETURNING *;`,
+			res
+		)
+	else if (title && user_id)
+		clientInsertQuery(
+			`UPDATE post SET deleted = TRUE WHERE user_id = ${user_id} AND title LIKE '%${title}%' RETURNING *;`,
+			res
+		)
+	else if (content && user_id)
+		clientInsertQuery(
+			`UPDATE post SET deleted = TRUE WHERE user_id = ${user_id} AND content LIKE '%${content}%' RETURNING *;`,
+			res
+		)
+	else if (content && title)
+		clientInsertQuery(
+			`UPDATE post SET deleted = TRUE WHERE title LIKE '%${title}%' AND content LIKE '%${content}%' RETURNING *;`,
+			res
+		)
+	else if (user_id)
+		clientInsertQuery(
+			`UPDATE post SET deleted = TRUE WHERE user_id = ${user_id} RETURNING *;`,
+			res
+		)
+	else if (title)
+		clientInsertQuery(
+			`UPDATE post SET deleted = TRUE WHERE title LIKE '%${title}%' RETURNING *;`,
+			res
+		)
+	else if (content)
+		clientInsertQuery(
+			`UPDATE post SET deleted = TRUE WHERE content LIKE '%${content}%' RETURNING *;`,
+			res
+		)
+	else res.status(400).sendStatus(400)
+})
+
+ExpressApp.delete(`/comment`, (req, res) => {
+	const { id, post_id, user_id, content } =
+		req.query
+
+	if (id)
+		clientInsertQuery(
+			`UPDATE comment SET deleted = TRUE WHERE id = ${id} RETURNING *;`,
+			res
+		)
+	else if (post_id && user_id && content)
+		clientInsertQuery(
+			`UPDATE comment SET deleted = TRUE WHERE post_id = ${post_id} AND user_id = ${user_id} AND content LIKE '%${content}%' RETURNING *;`,
+			res
+		)
+	else if (post_id && content)
+		clientInsertQuery(
+			`UPDATE comment SET deleted = TRUE WHERE post_id = ${post_id} AND content LIKE '%${content}%' RETURNING *;`,
+			res
+		)
+	else if (post_id && user_id)
+		clientInsertQuery(
+			`UPDATE comment SET deleted = TRUE WHERE post_id = ${post_id} AND user_id = ${user_id} RETURNING *;`,
+			res
+		)
+	else if (user_id && content)
+		clientInsertQuery(
+			`UPDATE comment SET deleted = TRUE WHERE user_id = ${user_id} AND content LIKE '%${content}%' RETURNING *;`,
+			res
+		)
+	else if (post_id)
+		clientInsertQuery(
+			`UPDATE comment SET deleted = TRUE WHERE post_id = ${post_id} RETURNING *;`,
+			res
+		)
+	else if (user_id)
+		clientInsertQuery(
+			`UPDATE comment SET deleted = TRUE WHERE user_id = ${user_id} RETURNING *;`,
+			res
+		)
+	else if (content)
+		clientInsertQuery(
+			`UPDATE comment SET deleted = TRUE WHERE content LIKE '%${content}%' RETURNING *;`,
 			res
 		)
 	else res.status(400).sendStatus(400)
@@ -333,6 +443,6 @@ ExpressApp.listen(port, () =>
 		`Servidor respondendo na porta ${port}.\n`,
 		`Se estiver usando o host local, acesse o link http://localhost:${port}/.\n`,
 		`Para acessar uma tabela especifica use, por exemplo, http://localhost:${port}/user/.\n`,
-		`Para acessar um atributo especifico da consulta use, por exemplo, http://localhost:${port}/user/?id=1`
+		`Para encontrar um atributo especifico usando a consulta use, por exemplo, http://localhost:${port}/user/?id=1`
 	)
 )

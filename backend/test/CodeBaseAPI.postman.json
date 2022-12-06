@@ -14,40 +14,44 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8081/user/",
+							"raw": "http://localhost:8081/user/?id=45",
 							"protocol": "http",
-							"host": ["localhost"],
+							"host": [
+								"localhost"
+							],
 							"port": "8081",
-							"path": ["user", ""],
+							"path": [
+								"user",
+								""
+							],
 							"query": [
 								{
 									"key": "id",
-									"value": "1",
-									"description": "The user ID",
-									"disabled": true
+									"value": "45",
+									"description": "The user ID"
 								},
 								{
 									"key": "created",
-									"value": "2022-12-06",
-									"description": "The Date which the user was created",
+									"value": "2022-12-02T00:00:00",
+									"description": "The date which the user was created",
 									"disabled": true
 								},
 								{
 									"key": "name",
-									"value": "example",
+									"value": "oz",
 									"description": "The user name",
 									"disabled": true
 								},
 								{
 									"key": "description",
-									"value": "Oziel",
-									"description": "The occurence of the word in the user description",
+									"value": "auctor",
+									"description": "The occurences of words in the user description",
 									"disabled": true
 								},
 								{
 									"key": "deleted",
-									"value": "false",
-									"description": "The state of the user",
+									"value": "true",
+									"description": "The post state",
 									"disabled": true
 								}
 							]
@@ -62,9 +66,14 @@
 								"url": {
 									"raw": "http://localhost:8081/user/?description=Oziel",
 									"protocol": "http",
-									"host": ["localhost"],
+									"host": [
+										"localhost"
+									],
 									"port": "8081",
-									"path": ["user", ""],
+									"path": [
+										"user",
+										""
+									],
 									"query": [
 										{
 											"key": "id",
@@ -111,11 +120,16 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8081/post/",
+							"raw": "http://localhost:8081/post/?user_id=47",
 							"protocol": "http",
-							"host": ["localhost"],
+							"host": [
+								"localhost"
+							],
 							"port": "8081",
-							"path": ["post", ""],
+							"path": [
+								"post",
+								""
+							],
 							"query": [
 								{
 									"key": "id",
@@ -125,9 +139,8 @@
 								},
 								{
 									"key": "user_id",
-									"value": "10",
-									"description": "The user ID of the post",
-									"disabled": true
+									"value": "47",
+									"description": "The user ID who made the post"
 								},
 								{
 									"key": "created",
@@ -177,9 +190,14 @@
 								"url": {
 									"raw": "http://localhost:8081/post/?user_id=10",
 									"protocol": "http",
-									"host": ["localhost"],
+									"host": [
+										"localhost"
+									],
 									"port": "8081",
-									"path": ["post", ""],
+									"path": [
+										"post",
+										""
+									],
 									"query": [
 										{
 											"key": "id",
@@ -244,11 +262,16 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8081/comment/",
+							"raw": "http://localhost:8081/comment/?post_id=10&content=auctor",
 							"protocol": "http",
-							"host": ["localhost"],
+							"host": [
+								"localhost"
+							],
 							"port": "8081",
-							"path": ["comment", ""],
+							"path": [
+								"comment",
+								""
+							],
 							"query": [
 								{
 									"key": "id",
@@ -258,9 +281,8 @@
 								},
 								{
 									"key": "post_id",
-									"value": "21",
-									"description": "The post ID of the comment",
-									"disabled": true
+									"value": "10",
+									"description": "The post ID of the comment"
 								},
 								{
 									"key": "user_id",
@@ -277,8 +299,7 @@
 								{
 									"key": "content",
 									"value": "auctor",
-									"description": "The occurences of words in the comment",
-									"disabled": true
+									"description": "The occurences of words in the comment"
 								},
 								{
 									"key": "number_likes",
@@ -304,9 +325,14 @@
 								"url": {
 									"raw": "http://localhost:8081/comment/?post_id=21",
 									"protocol": "http",
-									"host": ["localhost"],
+									"host": [
+										"localhost"
+									],
 									"port": "8081",
-									"path": ["comment", ""],
+									"path": [
+										"comment",
+										""
+									],
 									"query": [
 										{
 											"key": "id",
@@ -368,14 +394,18 @@
 					"listen": "prerequest",
 					"script": {
 						"type": "text/javascript",
-						"exec": [""]
+						"exec": [
+							""
+						]
 					}
 				},
 				{
 					"listen": "test",
 					"script": {
 						"type": "text/javascript",
-						"exec": [""]
+						"exec": [
+							""
+						]
 					}
 				}
 			]
@@ -389,25 +419,30 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8081/user/?name=differa&password=example&description=asd",
+							"raw": "http://localhost:8081/user/?name=hadila&password=laksjdahsdg&description=hadila",
 							"protocol": "http",
-							"host": ["localhost"],
+							"host": [
+								"localhost"
+							],
 							"port": "8081",
-							"path": ["user", ""],
+							"path": [
+								"user",
+								""
+							],
 							"query": [
 								{
 									"key": "name",
-									"value": "differa",
+									"value": "hadila",
 									"description": "The name of the user to be added"
 								},
 								{
 									"key": "password",
-									"value": "example",
+									"value": "laksjdahsdg",
 									"description": "The user password"
 								},
 								{
 									"key": "description",
-									"value": "asd",
+									"value": "hadila",
 									"description": "The user description"
 								}
 							]
@@ -423,9 +458,14 @@
 						"url": {
 							"raw": "http://localhost:8081/post/?user_id=101&title=Sample&content=Some content",
 							"protocol": "http",
-							"host": ["localhost"],
+							"host": [
+								"localhost"
+							],
 							"port": "8081",
-							"path": ["post", ""],
+							"path": [
+								"post",
+								""
+							],
 							"query": [
 								{
 									"key": "user_id",
@@ -455,9 +495,13 @@
 						"url": {
 							"raw": "http://localhost:8081/comment?post_id=103&user_id=101&content=Isso aqui é um comentário \"(⁠ ͝⁠°⁠ ͜⁠ʖ͡⁠°⁠)⁠ᕤ ❤❤❤",
 							"protocol": "http",
-							"host": ["localhost"],
+							"host": [
+								"localhost"
+							],
 							"port": "8081",
-							"path": ["comment"],
+							"path": [
+								"comment"
+							],
 							"query": [
 								{
 									"key": "post_id",
@@ -488,14 +532,18 @@
 					"listen": "prerequest",
 					"script": {
 						"type": "text/javascript",
-						"exec": [""]
+						"exec": [
+							""
+						]
 					}
 				},
 				{
 					"listen": "test",
 					"script": {
 						"type": "text/javascript",
-						"exec": [""]
+						"exec": [
+							""
+						]
 					}
 				}
 			]
@@ -511,9 +559,14 @@
 						"url": {
 							"raw": "http://localhost:8081/comment/?post_id=21&content=Novo comentário",
 							"protocol": "http",
-							"host": ["localhost"],
+							"host": [
+								"localhost"
+							],
 							"port": "8081",
-							"path": ["comment", ""],
+							"path": [
+								"comment",
+								""
+							],
 							"query": [
 								{
 									"key": "id",
@@ -550,9 +603,14 @@
 						"url": {
 							"raw": "http://localhost:8081/post/",
 							"protocol": "http",
-							"host": ["localhost"],
+							"host": [
+								"localhost"
+							],
 							"port": "8081",
-							"path": ["post", ""],
+							"path": [
+								"post",
+								""
+							],
 							"query": [
 								{
 									"key": "id",
@@ -591,9 +649,14 @@
 						"url": {
 							"raw": "http://localhost:8081/user/?id=1&name&password&description=Oziel",
 							"protocol": "http",
-							"host": ["localhost"],
+							"host": [
+								"localhost"
+							],
 							"port": "8081",
-							"path": ["user", ""],
+							"path": [
+								"user",
+								""
+							],
 							"query": [
 								{
 									"key": "id",
@@ -614,6 +677,136 @@
 									"key": "description",
 									"value": "Oziel",
 									"description": "The user description"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "DELETE",
+			"item": [
+				{
+					"name": "UserDelete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/user?id=45",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"user"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "45",
+									"description": "The user ID"
+								},
+								{
+									"key": "name",
+									"value": "oz",
+									"description": "The user name",
+									"disabled": true
+								},
+								{
+									"key": "description",
+									"value": "lorem",
+									"description": "The user description",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PostDelete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/post?user_id=47&content=some",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"post"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1",
+									"description": "The post ID",
+									"disabled": true
+								},
+								{
+									"key": "user_id",
+									"value": "47",
+									"description": "The user ID who made the post"
+								},
+								{
+									"key": "title",
+									"value": "lorem",
+									"description": "The content of title has the value",
+									"disabled": true
+								},
+								{
+									"key": "content",
+									"value": "some",
+									"description": "The content of the post has the value"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CommentDelete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/comment/?post_id=10&content=auctor",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"comment",
+								""
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "10",
+									"description": "The comment ID",
+									"disabled": true
+								},
+								{
+									"key": "user_id",
+									"value": "10",
+									"description": "The user ID who commented",
+									"disabled": true
+								},
+								{
+									"key": "post_id",
+									"value": "10",
+									"description": "The post which the comment is in"
+								},
+								{
+									"key": "content",
+									"value": "auctor",
+									"description": "Whenever the comment content has the value"
 								}
 							]
 						}

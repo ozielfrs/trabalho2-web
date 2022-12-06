@@ -2,12 +2,11 @@
 
 ## ❌ Ainda não tem
 
-Implementação de métodos de atualização no Back-End, implementação dos métodos de deleção no bando de dados a partir do `express.js`.
 Implementação do Front-End.
 
 ## ✔️ Já tem
 
-Banco de Dados completo, implementação parcial do Back-End utilizando o `express.js` (Create, Read and Update).
+Banco de Dados completo, implementação total do Back-End utilizando o `express.js` (Create, Read, Update and Delete).
 
 ---
 
