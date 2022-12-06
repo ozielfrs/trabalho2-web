@@ -1,6 +1,6 @@
 const dotenv = require(`dotenv`)
 
-dotenv.config({ path: `./private/.env` })
+dotenv.config()
 
 const { PORT, BACKEND_URL } = process.env
 
