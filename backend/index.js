@@ -446,3 +446,5 @@ ExpressApp.listen(port, () =>
 		`Para encontrar um atributo especifico usando a consulta use, por exemplo, http://localhost:${port}/user/?id=1`
 	)
 )
+
+module.exports = ExpressApp
