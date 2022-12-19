@@ -10,7 +10,8 @@ import Footer from './components/Footer'
 
 function App() {
 	const [resp_user, setresp_user] = useState([]),
-		query = 'usuario/?username=adasd@&password=asdsadsadasd'
+		query = 'usuario/?username=ssasdas&password=0-zasdija'
+
 	useEffect(() => {
 		fetch(link + query)
 			.then(res => res.json())

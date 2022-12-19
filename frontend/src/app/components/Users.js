@@ -36,7 +36,6 @@ const Users = () => {
 									setfirst(first - 10)
 									setlast(first)
 								}
-								console.log(first, last)
 							}}>
 							&#60;&#60;
 						</Button>
@@ -49,7 +48,6 @@ const Users = () => {
 									setfirst(parseInt(users.length / 10) * 10)
 									setlast(users.length)
 								}
-								console.log(first, last)
 							}}>
 							&#62;&#62;
 						</Button>

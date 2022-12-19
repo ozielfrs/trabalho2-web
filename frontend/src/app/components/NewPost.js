@@ -53,12 +53,14 @@ function NewPost(props) {
 							<Form.Control
 								type="text"
 								placeholder="Título..."
+								id="formcontrolmodaltitle"
 								onChange={handleNewTitle}
 							/>
 							<Form.Label>Digite o que deseja postar aqui:</Form.Label>
 							<Form.Control
 								type="text"
 								placeholder="O que deseja dizer ao mundo..."
+								id="formcontrolmodalcontent"
 								onChange={handleNewContent}
 							/>
 						</Form.Group>

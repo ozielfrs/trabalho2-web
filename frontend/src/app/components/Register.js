@@ -13,23 +13,18 @@ function Register() {
 
 	const handleName = event => {
 			setfirst_name(event.target.value)
-			console.log(first_name)
 		},
 		handleLastName = event => {
 			setlast_name(event.target.value)
-			console.log(last_name)
 		},
 		handleUserame = event => {
 			setusername(event.target.value)
-			console.log(username)
 		},
 		handleEmail = event => {
 			setemail(event.target.value)
-			console.log(email)
 		},
 		handlePassword = event => {
 			setpassword(event.target.value)
-			console.log(password)
 		},
 		clearData = () => {
 			setfirst_name('')
@@ -58,7 +53,6 @@ function Register() {
 					)
 					.then(data => {
 						setlog(data)
-						console.log(data)
 					})
 					.catch(err => console.error(err))
 				clearData()
@@ -78,11 +72,11 @@ function Register() {
 				<Form
 					style={{ width: '75hw' }}
 					className="d-flex align-items-center justify-content-center flex-column">
-					<Form.Group className="mb-3" controlId="registerForm.Email">
+					<Form.Group className="mb-3" controlId="registerForm.Nome">
 						<Form.Label>Nome:</Form.Label>
 						<Form.Control type="text" placeholder="Nome..." onChange={handleName} />
 					</Form.Group>
-					<Form.Group className="mb-3" controlId="registerForm.Email">
+					<Form.Group className="mb-3" controlId="registerForm.Sobrenome">
 						<Form.Label>Sobrenome:</Form.Label>
 						<Form.Control
 							type="text"
@@ -90,7 +84,7 @@ function Register() {
 							onChange={handleLastName}
 						/>
 					</Form.Group>
-					<Form.Group className="mb-3" controlId="registerForm.Email">
+					<Form.Group className="mb-3" controlId="registerForm.Usuario">
 						<Form.Label>Nome de usuário:</Form.Label>
 						<Form.Control
 							type="text"

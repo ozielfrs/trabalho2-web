@@ -39,7 +39,6 @@ const News = props => {
 									setfirst(first - 10)
 									setlast(first)
 								}
-								console.log(first, last)
 							}}>
 							&#60;&#60;
 						</Button>
@@ -52,7 +51,6 @@ const News = props => {
 									setfirst(parseInt(posts.length / 10) * 10)
 									setlast(posts.length)
 								}
-								console.log(first, last)
 							}}>
 							&#62;&#62;
 						</Button>

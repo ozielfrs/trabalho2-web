@@ -49,7 +49,6 @@ function VerticallyCenteredComments(props) {
 									setfirst(first - 10)
 									setlast(first)
 								}
-								console.log(first, last)
 							}}>
 							&#60;&#60;
 						</Button>
@@ -62,7 +61,6 @@ function VerticallyCenteredComments(props) {
 									setfirst(parseInt(comments.length / 10) * 10)
 									setlast(comments.length)
 								}
-								console.log(first, last)
 							}}>
 							&#62;&#62;
 						</Button>
