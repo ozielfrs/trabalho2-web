@@ -1,12 +1,9 @@
 # Projeto 2 - Desenvolvimento Web - UNIFEI
 
-## ❌ Ainda não tem
-
-Implementação do Front-End.
 
 ## ✔️ Já tem
 
-Banco de Dados completo, implementação total do Back-End utilizando o `express.js` (Create, Read, Update and Delete).
+Tudo.
 
 ---
 

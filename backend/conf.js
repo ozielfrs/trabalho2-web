@@ -2,9 +2,9 @@ const dotenv = require(`dotenv`)
 
 dotenv.config()
 
-const { PORT, BACKEND_URL } = process.env
+const { PORT, SERVER } = process.env
 
 module.exports = {
 	port: PORT,
-	link: BACKEND_URL,
+	link: SERVER,
 }
