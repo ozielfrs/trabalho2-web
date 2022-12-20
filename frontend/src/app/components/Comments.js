@@ -1,19 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import {
-	Button,
-	ButtonToolbar,
-	ButtonGroup,
-	Card,
-	Container,
-	Modal,
-} from 'react-bootstrap'
+import { Button, Card, Container, Modal } from 'react-bootstrap'
 import NewComment from './NewComment'
 import { link } from './config/conf'
 
 function VerticallyCenteredComments(props) {
-	const [comments, setcomment] = useState([]),
-		[first, setfirst] = useState(0),
-		[last, setlast] = useState(10)
+	const [comments, setcomment] = useState([])
 
 	useEffect(() => {
 		fetch(link.concat('comment/'))
@@ -35,38 +26,6 @@ function VerticallyCenteredComments(props) {
 			</Modal.Header>
 			<Container className="d-flex flex-row justify-content-between">
 				<NewComment {...props} />
-
-				<ButtonToolbar
-					className="justify-content-between m-4"
-					aria-label="Toolbar with Button groups">
-					<ButtonGroup aria-label="First group">
-						<Button
-							onClick={() => {
-								if (first - 10 >= 0 && last !== comments.length) {
-									setfirst(first - 10)
-									setlast(first)
-								} else if (first - 10 >= 0) {
-									setfirst(first - 10)
-									setlast(first)
-								}
-							}}>
-							&#60;&#60;
-						</Button>
-						<Button
-							onClick={() => {
-								if (last + 10 <= comments.length) {
-									setfirst(first + 10)
-									setlast(last + 10)
-								} else if (last <= comments.length) {
-									setfirst(parseInt(comments.length / 10) * 10)
-									setlast(comments.length)
-								}
-							}}>
-							&#62;&#62;
-						</Button>
-					</ButtonGroup>
-				</ButtonToolbar>
-
 				<Button onClick={props.onHide} variant="secondary" className="m-4">
 					Fechar
 				</Button>
@@ -74,7 +33,7 @@ function VerticallyCenteredComments(props) {
 
 			<Modal.Body>
 				{comments ? (
-					comments.slice(first, last).map(comment => {
+					comments.map(comment => {
 						if (comment.post_id === props.id)
 							return (
 								<Card key={comment.id} className="m-2" style={{ width: 'inherit' }}>

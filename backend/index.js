@@ -63,7 +63,7 @@ const queryAdd = (query, type, key, val) => {
 
 const ExpressApp = express()
 
-ExpressApp.use(express.json(), bodyparser.json())
+ExpressApp.use(express.json(), bodyparser.json(), cors())
 
 let client = new Client(link)
 
@@ -179,15 +179,16 @@ ExpressApp.delete(`/usuario`, (req, res) => {
  * Posts
  */
 ExpressApp.get(`/post`, (req, res) => {
-	const { id, title, content, created, edited } = req.query
+	const { id, usuario_id, title, content, created, edited } = req.query
 
 	let query = `SELECT p.id, p.title, p.content, p.created, p.edited, p.usuario_id, u.first_name, u.last_name, u.username FROM post p`
 
-	if (id) query = queryAdd(query, `number`, `id`, id)
-	if (title) query = queryAdd(query, `str`, `title`, title)
-	if (content) query = queryAdd(query, `str`, `content`, content)
-	if (created) query = queryAdd(query, `date`, `created`, created)
-	if (edited) query = queryAdd(query, `date`, `edited`, edited)
+	if (usuario_id) query = queryAdd(query, `number`, `p.usuario_id`, usuario_id)
+	if (id) query = queryAdd(query, `number`, `p.id`, id)
+	if (title) query = queryAdd(query, `str`, `p.title`, title)
+	if (content) query = queryAdd(query, `str`, `p.content`, content)
+	if (created) query = queryAdd(query, `date`, `p.created`, created)
+	if (edited) query = queryAdd(query, `date`, `p.edited`, edited)
 
 	query += ' INNER JOIN usuario u ON p.usuario_id = u.id'
 

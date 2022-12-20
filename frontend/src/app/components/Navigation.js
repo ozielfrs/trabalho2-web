@@ -27,6 +27,16 @@ const Navigation = () => {
 					<Nav className="d-flex align-items-center mx-0 my-0">
 						<Nav.Item className="mx-3">
 							<Link
+								to="/"
+								onClick={() => toggleButton(1)}
+								disabled={page === 1}
+								style={{ textDecoration: 'none' }}
+								className={page === 1 ? 'link-secondary' : 'link-primary'}>
+								Home
+							</Link>
+						</Nav.Item>
+						<Nav.Item className="mx-3">
+							<Link
 								to="/news"
 								onClick={() => toggleButton(1)}
 								disabled={page === 1}

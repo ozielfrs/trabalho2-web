@@ -46,7 +46,6 @@ function NewComment(props) {
 						<Form.Group controlId="textarea">
 							<Form.Label>Digite o que deseja comentar aqui:</Form.Label>
 							<Form.Control
-								id="formcontrolmodalcomment"
 								type="text"
 								placeholder="O que deseja dizer ao mundo..."
 								onChange={handleNewContent}

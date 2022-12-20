@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Form, Button, Card, Container, Navbar, Nav } from 'react-bootstrap'
 import axios from 'axios'
 import { link } from './config/conf'
+import App from '../App'
 
 function Register() {
 	const [first_name, setfirst_name] = useState(''),
@@ -111,7 +112,7 @@ function Register() {
 			</Card>
 		</>
 	) : (
-		<div> Você já está registrado </div>
+		<App username={log.username} password={log.password} />
 	)
 }
 
