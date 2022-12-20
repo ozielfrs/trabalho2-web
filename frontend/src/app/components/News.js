@@ -59,7 +59,7 @@ const News = props => {
 			</Container>
 			{posts ? (
 				posts.slice(first, last).map(post => (
-					<Card key={post.id} className="m-2" style={{ width: '75vw' }}>
+					<Card key={`post${post.id}`} className="m-2" style={{ width: '75vw' }}>
 						<Card.Header>
 							{post.edited
 								? ' (Editado em ' +
@@ -77,10 +77,7 @@ const News = props => {
 								{new Date(post.created).toLocaleTimeString()}
 							</Card.Subtitle>
 							<Card.Text>{post.content}</Card.Text>
-							<ButtonGroup>
-								<Button>Curtir</Button>
-								<Comments {...post} />
-							</ButtonGroup>
+							<Comments key={`commentButton${post.id}`} {...post} />
 						</Card.Body>
 					</Card>
 				))
