@@ -1,39 +1,23 @@
 # Projeto 2 - Desenvolvimento Web - UNIFEI
 
+Aqui estão algumas imagens mostrando como o aplicativo desenvolvido tem funcionado.
 
-## ✔️ Já tem
+## Página de Postagens
+![Página de Postagem](./img/Screenshot%202024-01-21%20at%2010-49-13%20React%20App.png "Página de Postagens")
 
-Tudo.
+![Comentar em uma Postagem](./img/Screenshot%202024-01-21%20at%2010-50-57%20React%20App.png "Comentar em uma Postagem")
 
----
+![Comentar em uma Postagem](./img/Screenshot%202024-01-21%20at%2010-51-08%20React%20App.png "Comentar em uma Postagem")
 
-Exemplos usando o [Postman](https://www.postman.com/) presentes na pasta [test](/backend/test/). Para usá-los, deve-se importar o aquivo [CodeAPI](/backend/test/CodeBaseAPI.postman.json)
+![Comentar em uma Postagem](./img/Screenshot%202024-01-21%20at%2010-51-17%20React%20App.png "Comentar em uma Postagem")
 
-O projeto tem o banco de dados, inserções de dados de exemplo e CRUD (Create, Read, Update and Delete) definidos na pasta [sql](/sql). A documentação do banco e seu diagrama estão presentes na mesma pasta.
+## Página de Usuários
+![Página de Usuários](./img/Screenshot%202024-01-21%20at%2010-51-50%20React%20App.png "Página de Usuários")
 
-Além disso, o código utilizado para o backend da aplicação se encontra na pasta [backend](/backend), as requisições funcionam da seguinte maneira:
+## Sobre o BackEnd
 
-- O utilitario indica qual tabela deseja acessar;
-- A tabela é acessada e retorna todos os dados possíveis.
+A conexão com o banco de dados relacional do aplicativo foi feita via ExpressJS, dados são requisitados, postados ou excluidos a partir de conexões encontradas na página [Índice](./backend/index.js).
 
-Por exemplo, pode-se usar:
+## Página Sobre
 
-```bash
-http://localhost:8081/user/?id=1
-```
-
-E esse link retornará da tabela "user" os dados do usuário de `id=1`, em um _array_, ou seja, um `json` contido dentro de um _array_. Podem ser adicionadas mais consultas via link, por exemplo:
-
-```bash
-http://localhost:8081/user/?id=1&description=lorem
-```
-
-E esse link retornará, para cada item da consulta, o resultado filtrado para tal. O próximo link de exemplo também filtra todos os usuários com os atributos iguais aos passados pela consulta:
-
-```bash
-http://localhost:8081/user/?id=1&created=2022-12-02&name=oz&description=lorem&deleted=true
-```
-
-Que retornaria todos os dados acessíveis passados.
-
----
+![Página de Sobre](./img/Screenshot%202024-01-21%20at%2010-52-03%20React%20App.png "Página de Sobre")
